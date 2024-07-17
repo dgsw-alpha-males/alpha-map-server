@@ -16,7 +16,7 @@ class ArticleEntity(
     @Column(nullable = false)
     val title: String,
 
-    @Column(nullable = false)
+    @Column(length = 50000)
     val content: String,
 
     @Column(nullable = false)

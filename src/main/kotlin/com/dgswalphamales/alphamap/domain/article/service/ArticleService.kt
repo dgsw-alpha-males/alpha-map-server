@@ -16,6 +16,7 @@ class ArticleService(
     private fun toDomain(articleRequest: ArticleRequest): Article {
         return Article(
             title = articleRequest.title,
+            tag = articleRequest.tag,
             content = articleRequest.content,
             imgUrl = articleRequest.imgUrl,
             donationDescription = articleRequest.donationDescription
@@ -57,7 +58,7 @@ class ArticleService(
         return BaseResponse(
             message = "아티클 불러오기 성공",
             data = toDomain(
-                articleRepository.findByTagContains(tag) ?: throw CustomException(ArticleErrorCode.NOT_FOUND)
+                articleRepository.findByTagEquals(tag) ?: throw CustomException(ArticleErrorCode.NOT_FOUND)
             )
         )
     }
