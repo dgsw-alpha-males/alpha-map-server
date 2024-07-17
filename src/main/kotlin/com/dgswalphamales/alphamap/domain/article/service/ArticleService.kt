@@ -17,9 +17,10 @@ class ArticleService(
         return Article(
             title = articleRequest.title,
             tag = articleRequest.tag,
+            hardness = articleRequest.hardness,
+            latitude = articleRequest.latitude,
             content = articleRequest.content,
-            imgUrl = articleRequest.imgUrl,
-            donationDescription = articleRequest.donationDescription
+            imgUrl = articleRequest.imgUrl
         )
     }
 
@@ -28,10 +29,11 @@ class ArticleService(
             id = articleEntity.id,
             title = articleEntity.title,
             tag = articleEntity.tag,
+            hardness = articleEntity.hardness,
+            latitude = articleEntity.latitude,
             content = articleEntity.content,
             createdAt = articleEntity.createdAt,
-            imgUrl = articleEntity.imgUrl,
-            donationDescription = articleEntity.donationDescription
+            imgUrl = articleEntity.imgUrl
         )
     }
 
@@ -39,10 +41,11 @@ class ArticleService(
         return ArticleEntity(
             title = article.title,
             tag = article.tag,
+            hardness = article.hardness,
+            latitude = article.latitude,
             content = article.content,
             createdAt = article.createdAt,
-            imgUrl = article.imgUrl,
-            donationDescription = article.donationDescription
+            imgUrl = article.imgUrl
         )
     }
 
@@ -60,6 +63,13 @@ class ArticleService(
             data = toDomain(
                 articleRepository.findByTagEquals(tag) ?: throw CustomException(ArticleErrorCode.NOT_FOUND)
             )
+        )
+    }
+
+    fun getAll(): BaseResponse<List<Article>> {
+        return BaseResponse(
+            message = "아티클들 불러오기 성공",
+            data = articleRepository.findAll().map { toDomain(it) }
         )
     }
 

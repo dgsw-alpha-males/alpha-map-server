@@ -14,6 +14,12 @@ class ArticleEntity(
     val tag: String,
 
     @Column(nullable = false)
+    val latitude: Double,
+
+    @Column(nullable = false)
+    val hardness: Double,
+
+    @Column(nullable = false)
     val title: String,
 
     @Column(length = 50000)
@@ -23,9 +29,6 @@ class ArticleEntity(
     val createdAt: LocalDateTime,
 
     @Column(nullable = false)
-    val imgUrl: String,
-
-    @Column(nullable = false)
-    val donationDescription: String
+    val imgUrl: String
 
 )
