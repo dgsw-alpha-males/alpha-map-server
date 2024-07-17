@@ -1,24 +1,19 @@
 package com.dgswalphamales.alphamap.global.config
 
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.cors.CorsConfiguration
-import org.springframework.web.cors.CorsConfigurationSource
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-class SpringConfig {
-    @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
-        val corsConfiguration = CorsConfiguration()
-        corsConfiguration.addAllowedOriginPattern("*")
-        corsConfiguration.addAllowedHeader("*")
-        corsConfiguration.addAllowedMethod("*")
-        corsConfiguration.allowCredentials = true
+@EnableWebMvc
+class SpringConfig : WebMvcConfigurer {
 
-        val urlBasedCorsConfigurationSource = UrlBasedCorsConfigurationSource()
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration)
-
-        return urlBasedCorsConfigurationSource
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
+            .allowedHeaders("*")
+            .allowCredentials(true)
     }
 }
