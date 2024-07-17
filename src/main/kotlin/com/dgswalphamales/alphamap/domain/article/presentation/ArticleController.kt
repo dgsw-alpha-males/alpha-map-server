@@ -26,7 +26,7 @@ class ArticleController(
         return articleService.get(tag)
     }
 
-    @GetMapping
+    @GetMapping("/all")
     fun getAll(): BaseResponse<List<Article>>{
         return articleService.getAll()
     }
