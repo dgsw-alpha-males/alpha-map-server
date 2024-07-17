@@ -41,8 +41,8 @@ class ArticleService(
         return ArticleEntity(
             title = article.title,
             tag = article.tag,
-            hardness = article.latitude,
-            latitude = article.hardness,
+            hardness = article.hardness,
+            latitude = article.latitude,
             content = article.content,
             createdAt = article.createdAt,
             imgUrl = article.imgUrl
