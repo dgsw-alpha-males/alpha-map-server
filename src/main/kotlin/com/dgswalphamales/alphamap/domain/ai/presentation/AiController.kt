@@ -1,6 +1,7 @@
 package com.dgswalphamales.alphamap.domain.ai.presentation
 
 
+import com.dgswalphamales.alphamap.domain.ai.presentation.dto.request.MessageRequest
 import com.dgswalphamales.alphamap.domain.ai.service.AiService
 import com.dgswalphamales.alphamap.global.response.BaseResponse
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,7 +16,7 @@ class AiController(
 ) {
     @PostMapping("/chat")
     fun chat(
-        @RequestBody message: String,
+        @RequestBody message: MessageRequest,
     ): BaseResponse<String> {
         return aiService.get(message)
     }

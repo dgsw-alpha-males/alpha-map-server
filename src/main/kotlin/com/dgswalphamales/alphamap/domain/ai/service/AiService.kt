@@ -1,5 +1,6 @@
 package com.dgswalphamales.alphamap.domain.ai.service
 
+import com.dgswalphamales.alphamap.domain.ai.presentation.dto.request.MessageRequest
 import com.dgswalphamales.alphamap.global.response.BaseResponse
 import org.springframework.ai.chat.prompt.PromptTemplate
 import org.springframework.ai.openai.OpenAiChatModel
@@ -13,12 +14,17 @@ class AiService(
 ) {
 
     fun get(
-        message: String,
+        message: MessageRequest,
     ): BaseResponse<String> {
 
-        val promptTemplate = PromptTemplate("너는 사회문제를 잘 알고있는 사회문제 전문가야. 사용자가 너한테 사회 문제에 관련해서 질문을 하면 너는 전문가처럼 답변을 진행해줘야해. 사용자의 질문은 {question}이야 ")
+        val promptTemplate = PromptTemplate(
+            "너는 사회문제를 잘 알고있는 사회문제 전문가야. " +
+                    "사용자가 너한테 사회 문제에 관련해서 질문을 하면 너는 전문가처럼 답변을 진행해줘야해. " +
+                    "사용자" +
+                    "사용자의 질문은 {question}이야 "
+        )
 
-        val prompt = promptTemplate.create(Map.of<String, Any>("question", message))
+        val prompt = promptTemplate.create(Map.of<String, Any>("question", message.message))
 
 
         return BaseResponse(
